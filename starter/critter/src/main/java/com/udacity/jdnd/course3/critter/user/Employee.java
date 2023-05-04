@@ -23,7 +23,20 @@ public class Employee extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Set<DayOfWeek> daysAvailable;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "schedules_employees",
+            joinColumns = @JoinColumn(
+                    name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "schedule_id"
+            )
+    )
     private List<Schedule> schedules;
 
+    public Employee(String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable) {
+        super(name);
+        this.skills = skills;
+        this.daysAvailable = daysAvailable;
+    }
 }

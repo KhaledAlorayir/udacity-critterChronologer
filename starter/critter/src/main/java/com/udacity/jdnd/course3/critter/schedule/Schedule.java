@@ -18,10 +18,25 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "schedules_employees",
+            joinColumns = @JoinColumn(
+                    name = "schedule_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "employee_id"
+            )
+    )
     private List<Employee> employees;
-    @ManyToMany
-    private List<Pet> pets;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "schedules_pets",
+            joinColumns = @JoinColumn(
+                    name = "schedule_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "pet_id"
+            )
+    )    private List<Pet> pets;
     private LocalDate date;
 
 }

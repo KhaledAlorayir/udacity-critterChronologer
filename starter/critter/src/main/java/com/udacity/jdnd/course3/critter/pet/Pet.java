@@ -26,6 +26,22 @@ public class Pet extends BaseEntity {
     @ManyToOne(optional = false)
     private Customer owner;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "schedules_pets",
+            joinColumns = @JoinColumn(
+                    name = "pet_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "schedule_id"
+            )
+    )
     private List<Schedule> schedules;
+
+    public Pet(String name, PetType type, String notes, LocalDate birthDate, Customer owner) {
+        super(name);
+        this.type = type;
+        this.notes = notes;
+        this.birthDate = birthDate;
+        this.owner = owner;
+    }
 }
