@@ -115,6 +115,9 @@ public class CritterFunctionalTest {
         PetDTO newPet = petController.savePet(petDTO);
 
         CustomerDTO owner = userController.getOwnerByPet(newPet.getId());
+        System.out.println(owner);
+        System.out.println(newPet);
+        System.out.println(newCustomer);
         Assertions.assertEquals(owner.getId(), newCustomer.getId());
         Assertions.assertEquals(owner.getPetIds().get(0), newPet.getId());
     }

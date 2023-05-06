@@ -4,6 +4,8 @@ import com.udacity.jdnd.course3.critter.schedule.Schedule;
 import com.udacity.jdnd.course3.critter.shared.BaseEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -17,6 +19,7 @@ import java.util.Set;
 public class Employee extends BaseEntity {
 
     @ElementCollection
+    @Fetch(FetchMode.SUBSELECT)
     @Enumerated(EnumType.STRING)
     private Set<EmployeeSkill> skills;
     @ElementCollection

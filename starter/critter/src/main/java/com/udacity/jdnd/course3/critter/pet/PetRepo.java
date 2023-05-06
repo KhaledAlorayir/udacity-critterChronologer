@@ -10,4 +10,5 @@ public interface PetRepo extends JpaRepository<Pet,Long> {
     @Query("SELECT p From Pet p JOIN FETCH p.owner o")
     List<Pet> getAllWithOwner();
     List<Pet> findByOwner(Customer customer);
+    List<Pet> findByIdIn(List<Long> ids);
 }

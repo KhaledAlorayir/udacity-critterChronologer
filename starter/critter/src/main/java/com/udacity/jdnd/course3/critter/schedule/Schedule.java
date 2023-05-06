@@ -39,4 +39,9 @@ public class Schedule {
     )    private List<Pet> pets;
     private LocalDate date;
 
+    public Schedule(List<Employee> employees, List<Pet> pets, LocalDate date) {
+        this.employees = employees;
+        this.pets = pets;
+        this.date = date;
+    }
 }

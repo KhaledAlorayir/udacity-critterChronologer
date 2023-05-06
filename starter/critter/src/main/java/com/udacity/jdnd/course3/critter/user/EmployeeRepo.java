@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface EmployeeRepo extends JpaRepository<Employee,Long> {
-    @Query("SELECT e FROM Employee e JOIN e.schedules s WHERE e.skills IN :skills AND s.date = :date")
+    @Query("SELECT e FROM Employee e JOIN e.schedules sc JOIN FETCH e.skills sk WHERE sk IN :skills AND sc.date = :date")
     List<Employee> findEmployeesBySkillsAndScheduleDate(Set<EmployeeSkill> skills, LocalDate date);
+    List<Employee> findByIdIn(List<Long> ids);
 }

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CustomerRepo extends JpaRepository<Customer,Long> {
-    @Query("SELECT c FROM Customer c JOIN FETCH c.pets")
+    @Query("SELECT DISTINCT c FROM Customer c JOIN FETCH c.pets")
     List<Customer> getAllWithPets();
 }

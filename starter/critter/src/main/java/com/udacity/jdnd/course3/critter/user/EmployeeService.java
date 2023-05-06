@@ -32,6 +32,7 @@ public class EmployeeService {
     }
 
     public List<EmployeeDTO> findEmployeesForService(EmployeeRequestDTO employeeDTO) {
+        System.out.println("here");
         return employeeRepo.findEmployeesBySkillsAndScheduleDate(employeeDTO.getSkills(),employeeDTO.getDate()).stream().map(EmployeeDTO::mapToEmployeeDTO).collect(Collectors.toList());
     }
 }

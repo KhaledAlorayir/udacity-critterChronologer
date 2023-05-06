@@ -1,15 +1,24 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
+import com.udacity.jdnd.course3.critter.shared.BaseEntity;
+import com.udacity.jdnd.course3.critter.user.Employee;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents the form that schedule request and response data takes. Does not map
  * to the database directly.
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ScheduleDTO {
     private long id;
     private List<Long> employeeIds;
@@ -17,43 +26,11 @@ public class ScheduleDTO {
     private LocalDate date;
     private Set<EmployeeSkill> activities;
 
-    public long getId(){
-        return id;
-    }
-    
-    public void setId(long id){
-        this.id = id;
-    }
-    
-    public List<Long> getEmployeeIds() {
-        return employeeIds;
-    }
 
-    public void setEmployeeIds(List<Long> employeeIds) {
-        this.employeeIds = employeeIds;
-    }
-
-    public List<Long> getPetIds() {
-        return petIds;
-    }
-
-    public void setPetIds(List<Long> petIds) {
-        this.petIds = petIds;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Set<EmployeeSkill> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(Set<EmployeeSkill> activities) {
-        this.activities = activities;
+    public static ScheduleDTO mapToScheduleDTO(Schedule schedule) {
+        List<Long> employeeIds = schedule.getEmployees().stream().map(BaseEntity::getId).collect(Collectors.toList());
+        List<Long> petIds = schedule.getPets().stream().map(BaseEntity::getId).collect(Collectors.toList());
+        Set<EmployeeSkill> activities = schedule.getEmployees().stream().map(Employee::getSkills).flatMap(Set::stream).collect(Collectors.toSet());
+        return new ScheduleDTO(schedule.getId(),employeeIds,petIds,schedule.getDate(),activities);
     }
 }
