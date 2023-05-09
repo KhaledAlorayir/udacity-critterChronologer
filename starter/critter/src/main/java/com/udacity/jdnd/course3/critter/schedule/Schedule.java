@@ -5,6 +5,7 @@ import com.udacity.jdnd.course3.critter.user.Employee;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Data
+@Transactional
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

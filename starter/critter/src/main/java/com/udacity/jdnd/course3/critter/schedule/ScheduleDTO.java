@@ -26,6 +26,11 @@ public class ScheduleDTO {
     private LocalDate date;
     private Set<EmployeeSkill> activities;
 
+    public ScheduleDTO(List<Long> employeeIds, List<Long> petIds, LocalDate date) {
+        this.employeeIds = employeeIds;
+        this.petIds = petIds;
+        this.date = date;
+    }
 
     public static ScheduleDTO mapToScheduleDTO(Schedule schedule) {
         List<Long> employeeIds = schedule.getEmployees().stream().map(BaseEntity::getId).collect(Collectors.toList());

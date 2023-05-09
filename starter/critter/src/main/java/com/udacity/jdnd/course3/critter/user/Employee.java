@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@Transactional
 @NoArgsConstructor
 public class Employee extends BaseEntity {
 
