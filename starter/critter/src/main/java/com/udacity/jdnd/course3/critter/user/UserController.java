@@ -51,7 +51,6 @@ public class UserController {
         employeeService.setAvailability(daysAvailable,employeeId);
     }
 
-    //TODO test this endpoint after schudelCrud
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
         return employeeService.findEmployeesForService(employeeDTO);

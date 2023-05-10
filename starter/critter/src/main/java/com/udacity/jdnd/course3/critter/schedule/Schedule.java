@@ -15,7 +15,6 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Data
-@Transactional
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
